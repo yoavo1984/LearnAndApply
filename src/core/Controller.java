@@ -1,10 +1,17 @@
 package core;
 
-public class Controller implements Choosable<Item>, renderable<Item>{
-	Comparable<Item> list;
+import java.util.Collection;
+
+public class Controller implements Choosable<Item>, Renderable<Item>{
+	Collection<Item> list;
 	public Controller() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void setDataSource (Collection<Item> list) {
+		this.list = list;
+	}
+	
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
@@ -16,11 +23,10 @@ public class Controller implements Choosable<Item>, renderable<Item>{
 		
 	}
 	@Override
-	public Comparable<Item> dataSource() {
+	public Collection<Item> dataSource() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
 	
-
 }
