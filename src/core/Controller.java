@@ -2,8 +2,10 @@ package core;
 
 import java.util.Collection;
 
+import ui.Renderable;
+
 public class Controller implements Choosable<Item>, Renderable<Item>{
-	Collection<Item> list;
+	private Collection<Item> list;
 	public Controller() {
 		// TODO Auto-generated constructor stub
 	}
@@ -13,8 +15,9 @@ public class Controller implements Choosable<Item>, Renderable<Item>{
 	}
 	
 	@Override
-	public void render() {
+	public void render(Collection <Item> dataSource) {
 		// TODO Auto-generated method stub
+		System.out.println("Rendering from controller");
 		
 	}
 	@Override
@@ -25,7 +28,7 @@ public class Controller implements Choosable<Item>, Renderable<Item>{
 	@Override
 	public Collection<Item> dataSource() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.list;
 	}
 	
 	

@@ -17,6 +17,7 @@ public class CoreMain {
 		}
 		
 		controller.setDataSource(items);
+		controller.render(controller.dataSource());
 	}
 
 }
