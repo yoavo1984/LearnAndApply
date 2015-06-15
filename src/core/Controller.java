@@ -22,7 +22,7 @@ public class Controller  implements Choosable<Item>, Renderable<Item>, Runnable 
 	}
 	
 	@Override
-	public void render(Collection <Item> dataSource) {
+	public void render() {
 		// TODO Auto-generated method stub
 		System.out.println("Rendering from controller");
 		
@@ -44,11 +44,9 @@ public class Controller  implements Choosable<Item>, Renderable<Item>, Runnable 
         while(true) {
                 try {
                 	if (this.changed){ 
-                		this.render(this.dataSource());
                 		this.changed = false;
-                	} else{
-                		System.out.println("nothing has been changed");
-                	}
+                		this.render();
+                	} 
                 	
 					Thread.sleep(200);
 				} catch (InterruptedException e) {
