@@ -27,6 +27,10 @@ public class LearnAndApplyData implements Serializable{
 		times[objIndex] = value;
 	}
 	
+	public int getTimesArraySize () {
+		return times.length;
+	}
+	
 	public void cleanData () {
 		for (int i = 0; i < this.times.length; i++) {
 			times[i] = 0;

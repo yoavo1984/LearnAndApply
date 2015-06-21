@@ -7,11 +7,14 @@
 
 package applying;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import serialization.*;
 import core.Choosable;
 import core.Item;
+import core.Uniqueness;
 
 public aspect ApplyByCount {
 
@@ -19,15 +22,59 @@ public aspect ApplyByCount {
 	
 	Collection<Item> around() : gettingDataSource() {
 		Collection<Item> collection = proceed();
+		LearnAndApplyData data;
 		
 		try {
-			LearnAndApplyData data = (LearnAndApplyData)SerializationUtil.deserialize(LearnAndApplyData.FILE_NAME);
+			data = (LearnAndApplyData)SerializationUtil.deserialize(LearnAndApplyData.FILE_NAME);
 		} catch (Exception e) {
-			return collection
+			return collection;
+		}
+		
+		return this.sortCollectionByTimeData(collection, data);
+	}
+	
+	private Collection<Item> sortCollectionByTimeData(Collection<Item> collection, LearnAndApplyData data) {
+		Collection<Item> retval = new ArrayList<Item>();
+		
+		int dataSize = data.getTimesArraySize();
+		int[] tempDataTimeArray = this.createDataTimeArrayCopy(data);
+		
+		for (int i = 0 ; i < dataSize; i++) {
+			int maxIndex = 0;
+			for (int j = 0; j < dataSize - 1; j++){
+				if (tempDataTimeArray[maxIndex] < tempDataTimeArray[j+1]) {
+					maxIndex = j+1;
+				}
+			}
+			retval.add(this.getItemFromCollection(collection, maxIndex));
+			tempDataTimeArray[maxIndex] = -1;
 		}
 		
 		
-		return collection;
+		return retval;
+	}
+	
+	private int[] createDataTimeArrayCopy (LearnAndApplyData data){
+		int dataSize = data.getTimesArraySize();
+		int []retval = new int[dataSize];
+		
+		for (int i = 0; i < dataSize; i++) {
+			retval[i] = data.getTimeOfObject(i);
+		}
+		
+		return retval;
+	}
+	
+	private Item getItemFromCollection (Collection<Item> collection, int objId) {
+		for (Iterator<? extends Uniqueness> iterator = collection.iterator(); iterator.hasNext();) {
+			Uniqueness item = iterator.next();
+			
+			if (objId == item.getId()){
+				return (Item)item;
+			}
+		}
+
+		return null;
 	}
 
 }
