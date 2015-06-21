@@ -18,7 +18,10 @@ public aspect ConsoleRenderer {
 		Renderable<Uniqueness> render = (Renderable<Uniqueness>) thisJoinPoint
 				.getThis();
 		Collection<? extends Uniqueness> collection = render.dataSource();
-
+		
+		System.out.println("--------------------------------------------------");
+		System.out.println("Learn & Apply: Choose one of the following items :");
+		System.out.println("--------------------------------------------------");
 		for (Iterator<? extends Uniqueness> iterator = collection.iterator(); iterator
 				.hasNext();) {
 
@@ -27,7 +30,7 @@ public aspect ConsoleRenderer {
 
 		input(render, collection);
 
-		System.out.println("Rendering from aspect");
+//		System.out.println("Rendering from aspect");
 	}
 	private static Thread inputThread = null;
 	private static class Input implements Callback<Integer> {
