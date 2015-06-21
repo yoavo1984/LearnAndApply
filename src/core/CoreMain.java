@@ -21,7 +21,6 @@ public class CoreMain {
 		new Thread(controller).start();
 //		controller.run();
 		Thread.sleep(400);
-		controller.choose(items.get(0));
 	}
 
 }
