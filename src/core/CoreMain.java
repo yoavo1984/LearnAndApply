@@ -15,9 +15,10 @@ public class CoreMain {
 		for (int i = 0 ; i < NUMBER_OF_ITEMS ; i++) {
 			items.add(new Item());
 		}
-		
+		CoreUser user = new CoreUser("John");
 		
 		Controller controller = new Controller(items);
+		controller.addUser(user);
 		new Thread(controller).start();
 //		controller.run();
 		Thread.sleep(400);

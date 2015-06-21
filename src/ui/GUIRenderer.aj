@@ -5,12 +5,10 @@ import java.util.Iterator;
 
 import core.Uniqueness;
 
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
-import javax.lang.model.element.VariableElement;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;

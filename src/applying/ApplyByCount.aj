@@ -17,8 +17,10 @@ import core.Item;
 import core.Uniqueness;
 
 public aspect ApplyByCount {
-
+	
+	declare precedence : ApplyByCount, UserSecurity;
 	pointcut gettingDataSource() : execution (public Collection<Item> dataSource())&&within(Choosable+);
+	
 	
 	Collection<Item> around() : gettingDataSource() {
 		Collection<Item> collection = proceed();

@@ -2,12 +2,12 @@ package core;
 
 import java.util.Collection;
 import java.util.List;
-
 import ui.Renderable;
 
-public class Controller  implements Choosable<Item>, Renderable<Item>, Runnable {
+public class Controller  implements Choosable<Item>, Renderable<Item>,UserDetails, Runnable {
 	private Collection<Item> list;
 	private boolean changed;
+	private CoreUser user;
 	public Controller() {
 		// TODO Auto-generated constructor stub
 	}
@@ -39,6 +39,27 @@ public class Controller  implements Choosable<Item>, Renderable<Item>, Runnable 
 		return this.list;
 	}
 	
+	@Override
+	public int getUserID() {
+		// TODO Auto-generated method stub
+		if (this.user != null) {
+			return user.getId();
+		} else {
+			return -1;
+		}
+	}
+
+	@Override
+	public String getUserName() {
+		// TODO Auto-generated method stub
+		return this.user.getName();
+	}
+	
+	public void addUser(CoreUser user) {
+		this.user = user;
+	}
+	
+	
 	public void run(){
 
         while(true) {
@@ -55,6 +76,8 @@ public class Controller  implements Choosable<Item>, Renderable<Item>, Runnable 
 				}
         }
 	}
+
+	
 	
 	
 }
