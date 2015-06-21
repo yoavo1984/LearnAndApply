@@ -23,8 +23,7 @@ public class Controller  implements Choosable<Item>, Renderable<Item>,UserDetail
 	
 	@Override
 	public void render() {
-		// TODO Auto-generated method stub
-		System.out.println("Rendering from controller");
+//		System.out.println("Rendering from controller");
 		
 	}
 	@Override
