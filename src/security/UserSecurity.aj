@@ -11,6 +11,7 @@ public aspect UserSecurity {
 	pointcut gettingDataSource() : execution (public Collection<Item> dataSource())&&within(UserDetails+);
 	
 	Collection<Item> around() : gettingDataSource() {
+
 		Collection<Item> collection = proceed();
 		
 		UserDetails hasUser = (UserDetails)thisJoinPoint.getThis();

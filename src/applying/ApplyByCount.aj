@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import security.*;
+
 import serialization.*;
 import core.Choosable;
 import core.Item;
@@ -18,7 +20,7 @@ import core.Uniqueness;
 
 public aspect ApplyByCount {
 	
-	declare precedence : ApplyByCount, UserSecurity;
+	declare precedence : UserSecurity, ApplyByCount ;
 	pointcut gettingDataSource() : execution (public Collection<Item> dataSource())&&within(Choosable+);
 	
 	

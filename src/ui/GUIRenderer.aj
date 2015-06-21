@@ -14,9 +14,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public aspect GUIRenderer {
-	pointcut rendering2() : execution(public void render(..))&&within(Renderable+) ;
+	//JFrame frame;
+	pointcut rendering() : execution(public void render(..))&&within(Renderable+) ;
 	
-	before () : rendering2 (){
+	before () : rendering(){
 		@SuppressWarnings("unchecked")
 		Renderable<Uniqueness> render = (Renderable<Uniqueness>)thisJoinPoint.getThis();
 		Collection <? extends Uniqueness> collection = render.dataSource();
@@ -30,10 +31,13 @@ public aspect GUIRenderer {
 	}
 	
 	private void displayGUI (Collection <? extends Uniqueness> collection,Renderable<Uniqueness> render) {
+//		if (frame!= null) {
+//			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+//		}
 		JFrame frame = new JFrame();
 		JLabel jblHelloWorld = new JLabel("");
 		
-		JButton[] buttons = new JButton[6];
+		JButton[] buttons = new JButton[collection.size()];
 		int i =0;
 		for (Iterator<? extends Uniqueness> iterator = collection.iterator(); iterator.hasNext();) {
 			
