@@ -5,14 +5,17 @@ import java.util.Iterator;
 
 import core.Uniqueness;
 
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.border.Border;
 
 public aspect GUIRenderer {
 	//JFrame frame;
@@ -37,9 +40,11 @@ public aspect GUIRenderer {
 //			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 //		}
 //		JFrame frame = new JFrame();
-		frame.setVisible(false);
+//		frame.setVisible(false);
 		frame.getContentPane().removeAll();
-		JLabel jblHelloWorld = new JLabel("");
+		frame.setSize(300 ,  500);
+		JLabel jLabel = new JLabel("Learn & Apply: Choose on of the following items");
+		
 		
 		JButton[] buttons = new JButton[collection.size()];
 		int i =0;
@@ -47,21 +52,22 @@ public aspect GUIRenderer {
 			
 			Uniqueness u = iterator.next();
 			buttons[i] = new JButton(String.valueOf(u.getId()));
-			buttons[i].setText(String.valueOf(u.getId()));
 			buttons[i].setMargin(new Insets(0, 0, 0, 0));
-			buttons[i].setSize(30, 30);
-			buttons[i].setLocation(50, 30 + i * 50);
+			buttons[i].setSize(200, 30);
+			buttons[i].setLocation((300 - 225) /2, 30 + i * 50);
 			
 			buttons[i].addActionListener(new GUIActionListener(render, collection, frame));
 			
 			frame.add(buttons[i]);
 			i++;
 		}
+	    jLabel.setHorizontalAlignment(JLabel.CENTER);
+	    jLabel.setVerticalAlignment(JLabel.TOP);
+		frame.add(jLabel);
 		
-		frame.add(jblHelloWorld);
-		
-		frame.setSize(100, 500);
+		frame.setSize(300 ,  500);
 		frame.setVisible(true);
+		frame.setAlwaysOnTop(true);
 		
 	}
 	
