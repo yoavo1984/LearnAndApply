@@ -1,13 +1,17 @@
 package security;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Vector;
 
 import core.Uniqueness;
 import core.UserDetails;
 import core.Item;
 
 public aspect UserSecurity {
+	
+	private static int[] ITEMS_TO_BLOCK = {0};
 	pointcut gettingDataSource() : execution (public Collection<Item> dataSource())&&within(UserDetails+);
 	
 	Collection<Item> around() : gettingDataSource() {
@@ -15,7 +19,7 @@ public aspect UserSecurity {
 		Collection<Item> collection = proceed();
 		
 		UserDetails hasUser = (UserDetails)thisJoinPoint.getThis();
-		Uniqueness itemToRemove = null;
+		Vector <Uniqueness> itemsToRemove = new Vector<Uniqueness>();
 		
 		if (hasUser.getUserID() == -1) {
 			return collection;
@@ -24,13 +28,18 @@ public aspect UserSecurity {
 			for (Iterator<? extends Uniqueness> iterator = collection.iterator(); iterator.hasNext();) {
 				Uniqueness tempItem = iterator.next();
 				
-				if(tempItem.getId() == 2) {
-					itemToRemove = tempItem;
+				for (int i = 0 ; i < ITEMS_TO_BLOCK.length; i++) {
+					if (ITEMS_TO_BLOCK[i] == tempItem.getId()){
+						itemsToRemove.add(tempItem);
+					}
 				}
 			}
 		}
 		
-		collection.remove(itemToRemove);
+		for (int i = 0; i < itemsToRemove.size();i++) {
+			collection.remove(itemsToRemove.elementAt(i));
+		}
+		
 		return collection;
 	}
 
