@@ -1,6 +1,5 @@
 package security;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Vector;
@@ -11,7 +10,7 @@ import core.Item;
 
 public aspect UserSecurity {
 	
-	private static int[] ITEMS_TO_BLOCK = {0};
+	private static int[] ITEMS_TO_BLOCK = {0,1,2};
 	pointcut gettingDataSource() : execution (public Collection<Item> dataSource())&&within(UserDetails+);
 	
 	Collection<Item> around() : gettingDataSource() {
