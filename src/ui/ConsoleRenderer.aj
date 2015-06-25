@@ -11,27 +11,19 @@ public aspect ConsoleRenderer {
 	pointcut rendering() : execution(public void render(..))&&within(Renderable+) ;
 
 	before() : rendering (){
-		this.clearScreen();
-		this.DrawLine();
-
 		@SuppressWarnings("unchecked")
 		Renderable<Uniqueness> render = (Renderable<Uniqueness>) thisJoinPoint
 				.getThis();
 		Collection<? extends Uniqueness> collection = render.dataSource();
 		
-		System.out.println("--------------------------------------------------");
-		System.out.println("Learn & Apply: Choose one of the following items :");
-		System.out.println("--------------------------------------------------");
-		for (Iterator<? extends Uniqueness> iterator = collection.iterator(); iterator
-				.hasNext();) {
-
-			System.out.println("Item :" + iterator.next().getId());
-		}
-
+		clearScreen();
+		render(collection);
 		input(render, collection);
 
 	}
 	private static Thread inputThread = null;
+	
+	
 	private static class Input implements Callback<Integer> {
 
 		private Collection<? extends Uniqueness> collection;
@@ -57,9 +49,19 @@ public aspect ConsoleRenderer {
 		}
 	}
 
+	
+	private void render(Collection<? extends Uniqueness> collection){
+		drawLine("-");
+		System.out.println("Learn & Apply: Choose one of the following items :");
+		drawLine("-");
+		for (Iterator<? extends Uniqueness> iterator = collection.iterator(); iterator
+				.hasNext();) {
+			System.out.println("Item :" + iterator.next().getId());
+		}
+		
+	}
 	private void input(Renderable<Uniqueness> render,
 			Collection<? extends Uniqueness> collection) {
-		//TODO break old input thread;
 		if (inputThread != null){
 			inputThread.interrupt();
 		}
@@ -75,9 +77,9 @@ public aspect ConsoleRenderer {
 	}
 
 
-	private void DrawLine() {
+	private void drawLine(String c) {
 		for (int i = 0; i < 50; i++) {
-			System.out.print("*");
+			System.out.print(c);
 		}
 		System.out.println();
 	}

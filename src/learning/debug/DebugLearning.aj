@@ -9,10 +9,9 @@ import java.awt.Rectangle;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.text.BadLocationException;
 
 import serialization.LearnAndApplyData;
-
+import learning.LearnItemCount;
 
 public aspect DebugLearning {
 	
@@ -26,9 +25,12 @@ public aspect DebugLearning {
 	before (LearnAndApplyData data) : saveLearning()&&args(data){
 		buildDebugFrame();
 		printDebug(data);
-		debugFrame.setVisible(true);
+		showFrame();
 	}
 	
+	private void showFrame(){
+		debugFrame.setVisible(true);
+	}
 	
 	private void printDebug(LearnAndApplyData data){
 		StringBuilder msg = new StringBuilder();
@@ -48,6 +50,7 @@ public aspect DebugLearning {
 		
 			jTextArea.append(msg.toString());
 	}
+	
 	private void buildDebugFrame(){
 		if (debugFrame == null ) {
 			debugFrame = new JFrame("Debug window");

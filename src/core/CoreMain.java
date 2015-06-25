@@ -9,7 +9,6 @@ public class CoreMain {
 	
 
 	public static void main(String[] args) throws InterruptedException {
-		// TODO Auto-generated method stub
 		
 		List<Item> items = new ArrayList<Item>(); 
 		
@@ -22,9 +21,7 @@ public class CoreMain {
 		if (ADD_USER) {
 			controller.addUser(user);
 		}
-		//controller.addUser(user);
 		new Thread(controller).start();
-//		controller.run();
 		Thread.sleep(400);
 	}
 

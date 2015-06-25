@@ -6,7 +6,6 @@ public class Item implements Uniqueness{
 	int id;
 	
 	public Item() {
-		// TODO Auto-generated constructor stub
 		this.id = lastId++;
 	}
 	

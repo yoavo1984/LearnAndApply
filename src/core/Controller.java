@@ -4,12 +4,17 @@ import java.util.Collection;
 import java.util.List;
 import ui.Renderable;
 
+/**
+ * Simple example of core implementation.
+ * 
+ * Data source can be any data fits to a collection. 
+ * This can be: contacts on cell phone; List of programs or even questions for the user 
+ */
 public class Controller  implements Choosable<Item>, Renderable<Item>,UserDetails, Runnable {
 	private Collection<Item> list;
 	private boolean changed;
 	private CoreUser user;
 	public Controller() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Controller(List<Item> items) {
@@ -21,26 +26,25 @@ public class Controller  implements Choosable<Item>, Renderable<Item>,UserDetail
 		this.list = list;
 	}
 	
+	/**
+	 * the function is been used by the two u.i aspect  + it can be implemented by the core itself.
+	 */
 	@Override
 	public void render() {
-//		System.out.println("Rendering from controller");
 		
 	}
 	@Override
 	public void choose(Item item) {
-		// TODO Auto-generated method stub
 		this.changed = true;
 		
 	}
 	@Override
 	public Collection<Item> dataSource() {
-		// TODO Auto-generated method stub
 		return this.list;
 	}
 	
 	@Override
 	public int getUserID() {
-		// TODO Auto-generated method stub
 		if (this.user != null) {
 			return user.getId();
 		} else {
@@ -50,7 +54,6 @@ public class Controller  implements Choosable<Item>, Renderable<Item>,UserDetail
 
 	@Override
 	public String getUserName() {
-		// TODO Auto-generated method stub
 		return this.user.getName();
 	}
 	
@@ -70,7 +73,6 @@ public class Controller  implements Choosable<Item>, Renderable<Item>,UserDetail
                 	
 					Thread.sleep(200);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
         }

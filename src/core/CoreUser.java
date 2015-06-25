@@ -9,8 +9,6 @@ public class CoreUser implements Uniqueness {
 	public CoreUser(String name) {
 		this.id = lastId++;
 		this.name = name;
-		
-		// TODO Auto-generated constructor stub
 	}
 	
 	public int getId() {

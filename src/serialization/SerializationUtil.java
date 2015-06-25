@@ -8,7 +8,13 @@ import java.io.ObjectOutputStream;
 
 public class SerializationUtil {
 
-	// deserialize to Object from given file
+	/**
+	 * Deserialize to Object from given file
+	 * @param fileName
+	 * @return
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
     public static Object deserialize(String fileName) throws IOException,
             ClassNotFoundException {
         FileInputStream fis = new FileInputStream(fileName);
@@ -18,7 +24,12 @@ public class SerializationUtil {
         return obj;
     }
  
-    // serialize the given object and save it to file
+    /**
+     * Serialize the given object and save it to file
+     * @param obj
+     * @param fileName
+     * @throws IOException
+     */
     public static void serialize(Object obj, String fileName)
             throws IOException {
         FileOutputStream fos = new FileOutputStream(fileName);

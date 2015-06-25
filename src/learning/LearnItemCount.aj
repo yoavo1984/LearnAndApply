@@ -1,20 +1,13 @@
 package learning;
 
-//import core.Uniqueness;
-
-import java.awt.Font;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.text.BadLocationException;
-
 import core.Choosable;
 import core.Item;
 import serialization.*;
-
+/**
+ * Demonstration of a possible learning aspect. 
+ * This Aspect counts the use in each item in the datasource by the unique id of each element  
+ *
+ */
 public aspect LearnItemCount {
 	
 	pointcut choosing() : execution(public void choose(Item))&&
