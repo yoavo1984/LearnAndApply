@@ -1,6 +1,5 @@
-package learning;
+package learning.debug;
 
-//import core.Uniqueness;
 
 import java.awt.Font;
 import java.awt.GraphicsDevice;
@@ -15,7 +14,7 @@ import javax.swing.text.BadLocationException;
 import serialization.LearnAndApplyData;
 
 
-public aspect debugLearning {
+public aspect DebugLearning {
 	
 	pointcut saveLearning() : execution(private void saveData(LearnAndApplyData)) &&  within(LearnItemCount);
 
